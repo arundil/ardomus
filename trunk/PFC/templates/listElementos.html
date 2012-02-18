@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<script type="text/javascript">
+function confirmar(form, id){
+    if (confirm('¿Estas seguro de eliminar '+form+'? \n' 
+    	+'Eliminaras los objetos relacionados con este elemento')){
+    	var form = document.getElementById(form.toString());
+    	var x = document.createElement("input");
+    	
+    	x.type = "hidden";
+    	x.name = "id";
+    	x.value = id;
+    	form.appendChild(x);
+       	form.submit();
+    }
+}
+</script> 
+
+<div id="cabecera">
+		<h1>Lista de los elementos de {{uc}}</h1>
+</div>
+
+<div id="zonas">
+		<h3>Lista de las zonas </h3>
+		
+		{% for zona in zonas %}
+		<form id="{{zona}}" action="/eliminarElementos/" method="post">
+			<div>
+				<span> {{zona}}
+				<input type="hidden" name="tipo" value="Zona" />
+				<a href="#" onclick="confirmar('{{zona}}','{{zona.id}}')"> eliminar</a>
+				 </span>
+				<br />
+				
+			</div>
+		
+		</form>
+			
+		{% endfor %}
+	
+	
+</div>
+{% if zonas.count != 0 %}
+<div id="motas">
+		<h3>Lista de las motas </h3>
+		
+		{% for mota in motas %}
+		<form id="{{mota}}" action="/eliminarElementos/" method="post">
+			<div>
+				<span> {{mota}}
+				<input type="hidden" name="tipo" value="Mota" />
+				<a href="#" onclick="confirmar('{{mota}}', '{{mota.id}}')"> eliminar</a>
+				 </span>
+				<br />
+				
+			</div>
+		
+		</form>
+		{% endfor %}
+
+</div>
+{% endif %}
+
+{% if motas.count != 0%}
+<div id="actuadores">
+		<h3>Lista de los actuadores </h3>
+		
+		{% for actuador in actuadores %}
+		<form id="{{ actuador }}" action="/eliminarElementos/" method="post">
+			<div>
+				<span> {{ actuador.tipo }} de la mota {{ actuador.mota }}
+				<input type="hidden" name="tipo" value="Actuador" />
+				<a href="#" onclick="confirmar('{{actuador}}', '{{actuador.id}}')"> eliminar</a>
+				 </span>
+				<br />
+				
+			</div>
+		
+		</form>	
+		{% endfor %}
+</div>
+
+<div id="sensores">
+		<h3>Lista de los sensores </h3>
+		
+		{% for sensor in sensores %}
+		<form id="{{ sensor }}" action="/eliminarElementos/" method="post">
+			<div>
+				<span> {{ sensor.tipo }} de la mota {{ sensor.mota }}
+				<input type="hidden" name="tipo" value="Sensor" />
+				<a href="#" onclick="confirmar('{{sensor}}', '{{sensor.id}}')"> eliminar</a>
+				 </span>
+				
+			</div>
+		
+		</form>		
+		{% endfor %}
+</div>
+
+{% endif %}
+{% endblock %}
+{% block opciones %}
+<a href="/addZonas/"> Añadir zonas nuevas</a>
+{% if zonas.count != 0 %}
+<a href="/addMotas/"> Añadir motas nuevas </a>
+{% endif %}
+{% if motas.count != 0%}
+<a href="/addActSen/"> Añadir actuadores y sensores nuevos </a>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+<script type="text/javascript">
+
+function play(ustream, id){
+	var div = document.getElementById("camara"+id);
+	var boton = document.getElementById("boton"+id);
+	div.innerHTML+=ustream;
+	boton.type="hidden";
+}
+
+</script>
+
+<div id="cabecera">
+<h1> Videovigilancia </h1>
+<h3> {{ mensaje }} </h3>		
+</div>
+
+<div>
+	{% for video in videos %}
+	<label> Camara {{ video.nombre }}</label>
+	<input id ="boton{{video.id}}" type="button" onclick="play('{{video.ustream}}','{{video.id}}')" 
+		value="Encender" />
+	{% if user.is_superuser %}
+		<form action="/modVideo/" method="post">
+		<div>
+		<input type="hidden" name = "id" value="{{video.id}}"/>
+		<input type="hidden" name = "eliminar" value="0"/>
+		<input type="submit" value="Cambiar código"/>
+		</div>
+		</form>
+		<form action="/modVideo/" method="post">
+		<div>
+		<input type="hidden" name = "id" value="{{video.id}}"/>
+		<input type="hidden" name = "eliminar" value="1"/>
+		<input type="submit" value="Eliminar camara"/>
+		</div>
+		</form>
+	{% endif %}
+	<div id="camara{{video.id}}">
+	
+	</div>
+	<br />
+	{% endfor %}
+</div>
+<input type="button" id="atras" name="atras" value=" Atrás " onclick="javascript:history.back();" />
+
+{% endblock %}

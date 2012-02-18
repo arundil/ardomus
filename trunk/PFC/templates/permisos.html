@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div id="cabecera">
+		<h1> Permiso{{ UZ|pluralize }} </h1>
+</div>
+
+<div id="UZ">
+	<h3> Lista de permisos </h3>
+
+	{% for usr in users %}
+		<p> El usuario {{ usr }} tiene permisos en:  </p>
+		<form action="/modpermisos/" method="get">
+		<div>
+			{% for uz in UZ %}
+				{% if uz.user = usr %}
+		   			{{uz.zona}},
+				{% endif %}
+			{% endfor %}
+		<br />
+			<input type="hidden" name="userp" value="{{ usr.username }}" />
+			<input type="submit" value="modificar permisos" />
+		</div>	
+		</form>
+		<br /> 
+	{% endfor %}
+<input type="button" id="atras" name="atras" value=" Atrás " onclick="javascript:history.back();" />
+</div>
+{% endblock %}

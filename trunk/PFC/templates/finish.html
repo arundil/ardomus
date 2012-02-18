@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div id="cabecera2">
+		<h1> Informe final </h1>
+		<h2> Comprueba que todo esta correcto.</h2>
+</div>
+
+<span> El id de la unidad de control: {{uc.id}} </span>
+<br />
+{% for zona in zonas %}
+<br />
+<span> El id de la zona {{zona}}: {{zona.id}} </span>
+{% endfor %}
+<br />
+{% for mota in motas %}
+<br />
+<span> El id de la mota {{mota}} de la zona {{mota.zona}}: {{mota.id}} </span>
+{% endfor %}
+<br />
+{% for actuador in actuadores %}
+<br />
+<span> Hay un actuador {{actuador.tipo}} en la mota {{actuador.mota}} 
+en la zona {{actuador.mota.zona}} </span>
+{% endfor %}
+<br />
+{% for sensor in sensores %}
+<br />
+<span> Hay un sensor {{sensor.tipo}} en la mota {{sensor.mota}} 
+en la zona {{sensor.mota.zona}} </span>
+{% endfor %}
+
+{% endblock %}

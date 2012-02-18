@@ -1,0 +1,7 @@
+<xml
+
+autoplay ="no" random = "si"
+
+rojo="50" verde="50" azul="50"
+
+>

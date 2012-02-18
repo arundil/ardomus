@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div id="cabecera">
+		<h1> Nueva camara de seguridad </h1>
+		<h3> {{ mensaje}} </h3>
+</div>
+	<span> Para crear el reproductor flash que reproduce las imagenes obtenidas
+	por la camara usamos la pagina web  
+	<a href="http://www.ustream.com/"> http://www.ustream.com/ </a>
+	pegando el codigo aqui en la zona "ustream".</span>
+	<form action="/addVideo/" method="post">
+	<div>
+	<label> Nombre: </label>
+	<input type="text" name="nombre" value ="{{video.nombre}}"/>
+	<br />
+	<label> Ustream: </label> 
+	<textarea rows="8" cols="50" name="ustream">
+	</textarea>
+	<br />
+	{% if video.nombre %}
+	<input type="hidden" name="id" value="{{video.id}}"/>
+	{% endif %}
+	<input type="submit" value = "añadir reproductor" />
+	</div>
+	</form>
+
+
+<input type="button" id="atras" name="atras" value=" Atrás " onclick="javascript:history.back();" />
+{% endblock %}

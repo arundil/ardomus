@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block login %}
+
+<div id="yaregistrado">
+	{% if form.errors %}
+	<p>Su nombre de usuari@ y/o contraseña no es válido. Por favor, inténtelo de nuevo. </p>
+	{% endif %}
+	{{ mensaje }}
+	<form method="post" action="{% url django.contrib.auth.views.login %}">
+					<h4>{{ form.username.label_tag }}
+						<span class="input">
+							{{ form.username }}
+						</span>
+					{{ form.password.label_tag }}
+						<span class="input">
+							{{ form.password }}
+						</span>
+					<a title="¿Has olvidado tu contraseña?" href="/recordar/">¿Has olvidado tu contraseña? </a><br/>
+						<input id="submit_button" class="submit withLabels" type="submit" value="Entrar" />
+					<label class="rememberMe" for="remember">
+					<input id="remember" class="rememberMe" type="checkbox" value="1" name="remember" />Recordarme</label>					
+					</h4>
+				
+	<!--<input type="submit" value="Entrar al sistema" id="boton2"/>-->
+	<p><input type="hidden" name="next" value="{{ next|escape }}" /></p>
+	</form>
+	<div id="opcionesInicio">
+	</div>
+</div>
+
+<div id="noregistrado">
+</div>
+{% endblock %}
+
+{% block content %}
+
+<h1>Bienvenidos:</h1> 
+<div id="imagen">
+<img src="/site_media/domotica.jpg" width="300" height="200" alt="50"/><br/>
+</div>
+
+<p>Árdomus es un sistema domótico inalambrico que permite domotizar su hogar de forma económica y rápida.</p>
+<p>Nuestros dispositivos inalámbricos evitarán hacer reformas en su hogar.</p>
+
+Árdomus esta diseñado para ser implantado en cualquier tipo de hogar, ya sea vivienda nueva o vivienda usada.
+Tambien ofrecemos servicios a oficinas. Los servicios que ofrece Árdomus son los siguientes:
+<h4>Seguridad</h4>
+<ul class= "lista_int">
+	<li>Detección de Incendios</li>
+	<li>Detección de Fuga de Gas</li>
+	<li>Deteccion de Inundaciones</li>
+	<li>Deteccion de Intrusos</li>
+</ul>
+<h4>Confort</h4>
+<ul class = "lista_int">
+	<li>Control de electrodomésticos</li>
+	<li>Control del sistema de riego</li>
+	<li>Control de la iluminación de la vivienda</li>
+	<li>Control de la climatización de la vivienda</li>
+	<li>Control del movimiento de persianas y cortinas</li>
+</ul>
+<h4>Ahorro Energético</h4>
+<ul class = "lista_int">
+	<li>Uso de distintos programas de ahorro energéticos, para ahorrar en su factura</li> 
+</ul>
+<h4>Facil uso tanto dentro como fuera del hogar</h4>
+<ul class = "lista_int">
+	<li>Interfaz amigable para su facil uso</li>
+	<li>Control total del hogar desde cualquier dispositivo con navegador y conexión a internet</li>
+</ul>
+<br/>
+<strong>Bienvenidos a la domótica inteligente, bienvenidos a la domótica del futuro.</strong>
+{% endblock %}
+		<!--	<fieldset>
+		
+			</fieldset> -->

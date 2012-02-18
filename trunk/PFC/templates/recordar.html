@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<form method="post" action="/recordar/">
+	<div>
+		<label> Usuario </label> 
+		<input type="text" name="user" />
+		<input type="submit" value="recordar" /> 
+	</div>
+</form>
+<br />
+<div id="contactar">
+<a href="/contactar/"> Contactar con Tecnico</a>
+</div>
+<input type="button" id="atras" name="atras" value=" Atrás " onclick="javascript:history.back();" />
+
+{% endblock %}

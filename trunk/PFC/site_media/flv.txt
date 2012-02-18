@@ -1,0 +1,4 @@
+<xml tu_email = "javi8286@hotmail.com"  tu_imagen="imagen.jpg" >
+<mi cancion="Forever-Bravaso" autor="John Stamos" direccion="RUBIK_en_1_minuto.flv" final="189" genero="rock" />
+
+</xml>

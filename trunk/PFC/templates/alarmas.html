@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div id="cabecera">
+		<h1>Alarmas</h1>
+		<h3> {{mensaje}} </h3>
+</div>
+<div id="alarmas">
+{% for alarma in alarmas %}
+
+	<span> La medicion que ha provocado la alarma es: {{alarma.medicion.id}}.</span> 
+	<h3>Por el motivo: {{ alarma.idmotivo }} {{ alarma.motivo }}.</h3> <br />  
+	Con los datos: <br />
+	<ul>
+		<li> Zona: {{alarma.medicion.zona}}</li>
+		<li> Mota: {{alarma.medicion.mota}}</li>
+		<li> Humedad: {{alarma.medicion.hum}}</li>
+		<li> Temperatura: {{alarma.medicion.temp}}</li>
+		<li> Luminosidad: {{alarma.medicion.lum}}</li>
+		<li> Movimiento: {{alarma.medicion.movimiento}}</li>
+		<li> Fecha: {{alarma.medicion.date}}</li>
+		<li> Hora: {{alarma.medicion.time}}</li>
+	</ul>
+	
+	
+	<form action="/alarmas/" method="post">
+		<div>
+		<input type="hidden" name="id" value="{{alarma.id}}" />
+		<input type="submit" value="eliminar alarma" />
+		</div>
+	</form>
+	<hr />
+{% endfor %}
+</div>
+{% endblock %}

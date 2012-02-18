@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div id="cabecera">
+		<h1>Modificar Permisos de {{userp}}</h1>
+					<h3>{{ mensaje }}</h3>
+</div>
+<div id="addpermisos">
+	<p> Lista de Zonas donde no tiene permisos </p>
+	{% for zona in zonas %}
+	<form action="/modificarpermisos/" method="post">
+			
+	<p>{{zona}}
+			<input type="hidden" name="zona" value="{{zona.nombre}}" />
+			<input type="hidden" name="userp" value="{{userp.username}}" />
+			<input type="hidden" name="valor" value="T" />
+			<input type="hidden" name="finish" value="{{finish}}" />
+			<input type="submit" value="añadir"/>
+	</p>
+		
+	</form>		
+	{% endfor %}
+</div>
+
+<div id="eliminarpermisos">
+<p> Lista de zonas donde tiene permisos </p>
+
+
+
+	{% for zonap in zonasp%}
+		<form action="/modificarpermisos/" method="post">
+			
+	<p>{{zonap.zona.nombre}}
+			<input type="hidden" name="zona" value="{{zonap.zona.nombre}}" />
+			<input type="hidden" name="userp" value="{{userp.username}}" />
+			<input type="hidden" name="valor" value="" />
+			<input type="hidden" name="finish" value="{{finish}}" />
+			<input type="submit" value="eliminar"/>
+				
+	</p>
+	</form>		
+	{% endfor %}	
+</div>
+
+{% endblock %}

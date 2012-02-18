@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<script type="text/javascript">
+
+function play(mixpod){
+	var div = document.getElementById("play");
+	var boton = document.getElementById("p");
+	div.innerHTML+=mixpod;
+	boton.type="hidden";
+}
+
+</script>
+
+<div id="cabecera">
+		<h1> Musica </h1>
+</div>
+{% if sonido.mixpod != "" %}
+	
+	<input id ="p" type="button" onclick="play('{{ sonido.mixpod }}')" value="Play" />
+	
+	<div id="play">
+	
+	</div>
+	
+		<form action="/setReproductor/" method="post">
+	<div>
+			<input type="submit" value = "Poner otro reproductor"/>
+	</div>
+		</form>
+	<br />
+{% else %}
+	<span> Puedes crear tu propio reproductor de música desde la página 
+	<a href="http://www.mixpod.com/"> http://www.mixpod.com/ </a>
+	pegando el codigo aqui. Recuerda coger el código de la pestaña other sites.
+	Se recomienda usar un reproductor sencillo.</span>
+	<form action="/sonido/" method="post">
+	<div>
+	<textarea rows="8" cols="50" name="mixpod" >
+	</textarea>
+	<input type="submit" value = "añadir reproductor" />
+	</div>
+	</form>
+{% endif %}
+
+<input type="button" id="atras" name="atras" value=" Atrás " onclick="javascript:history.back();" />
+{% endblock %}

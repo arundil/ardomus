@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div id="cabecera">
+		<h1> {{ zona }} {{ actuador }} </h1>
+</div>
+
+ <!-- Informamos de la temperatura de la zona  -->
+{% if count != 0 %}
+	<h3> Hace ahora mismo {{medicion.temp}} grados </h3>
+{% else %}
+	<h3> No se han encontrado mediciones para esta zona </h3>
+{% endif %}
+<br />
+<br />
+
+{% if arduinoActual.ac %}
+<form id="apagar" action="/actuador/" method="post">
+		<div>
+			
+			<input type="hidden" name="accion" value="apagar" />
+			<input type="hidden" name="zona" value="{{zona.nombre}}" />
+			<input type="hidden" name="mota" value="{{mota.nombre}}" />
+			<input type="hidden" name="actuador" value="Aire Acondicionado" />
+			<input type="submit" value="apagar aire acondicionado"/>
+			<br />
+				
+		</div>
+		
+</form>
+{% else %}
+<form id="encender" action="/actuador/" method="post">
+		<div>
+			
+			<input type="hidden" name="accion" value="encender" />
+			<input type="hidden" name="zona" value="{{zona.nombre}}" />
+			<input type="hidden" name="mota" value="{{mota.nombre}}" />
+			<input type="hidden" name="actuador" value="Aire Acondicionado" />
+			<input type="submit" value="encender aire acondicionado"/>
+			<br />
+				
+		</div>
+</form>
+{% endif %}
+<br />
+<input type="button" id="atras" name="atras" value=" Atrás " onclick="javascript:history.back();" />
+{% endblock %}

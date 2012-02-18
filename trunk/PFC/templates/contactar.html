@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div id="cabecera">
+<h1> Contactar con tecnico </h1>
+<h3> {{ mensaje }} </h3>		
+</div>
+
+
+	<form action="/contactar/" method="post">
+	<div>
+	<label> Asunto: &nbsp;</label>
+	<input type="text" name="asunto"/>
+	<br />
+	<label> Mensaje: </label> 
+	<textarea rows="8" cols="50" name="mensaje">
+	</textarea>
+	<br />
+	<input type="submit" value = "Mandar email" />
+	<br />
+	<br />
+	</div>
+	</form>
+	
+	<input type="button" id="atras" name="atras" value=" Atrás " onclick="javascript:history.back();" />
+
+{% endblock %}

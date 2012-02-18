@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div id="cabecera">
+		<h1>{{ zona }} {{ actuador }}</h1>
+		
+</div>
+{% if arduinoActual.luz %}
+<form id="apagar" action="/actuador/" method="post">
+		<div>
+			
+			<input type="hidden" name="accion" value="apagar" />
+			<input type="hidden" name="zona" value="{{zona.nombre}}" />
+			<input type="hidden" name="mota" value="{{mota.nombre}}" />
+			<input type="hidden" name="actuador" value="Luz" />
+			<input type="submit" value="apagar"/>
+			<br />
+				
+		</div>
+		
+</form>
+{% else %}
+<form id="encender" action="/actuador/" method="post">
+		<div>
+			
+			<input type="hidden" name="accion" value="encender" />
+			<input type="hidden" name="zona" value="{{zona.nombre}}" />
+			<input type="hidden" name="mota" value="{{mota.nombre}}" />
+			<input type="hidden" name="actuador" value="Luz" />
+			<input type="submit" value="encender"/>
+			<br />
+				
+		</div>
+</form>
+{% endif %}
+<br />
+<input type="button" id="atras" name="atras" value=" Atrás " onclick="javascript:history.back();" />
+{% endblock %}

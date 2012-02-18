@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block content %}
+<script type="text/javascript">
+
+function filtro(x){
+	var div = document.getElementById("div");
+	var tururu = document.createElement("form");
+	var filtro = document.createElement("input");
+	
+	tururu.action = "/filtroInformes/";
+	
+	filtro.type="hidden"
+	filtro.name = "filtro";
+	filtro.value = x;
+	
+	div.appendChild(tururu);
+	tururu.appendChild(filtro);
+	tururu.submit();
+	/* alert(tururu); */
+}
+
+</script>
+
+<div id="cabecera2">
+		<h1>Informe{{ informes|pluralize }}</h1>
+	<h3> {{ mensaje }}</h3>
+</div>
+
+<div id ="div">
+
+</div>
+	<a href="#" onclick="filtro(((1/24)/60))"> Ultimo minuto </a>
+	<a href="#" onclick="filtro(1/24)"> Ultima hora </a>
+	<a href="#" onclick="filtro(1)"> Ultimas 24h </a>
+	<a href="#" onclick="filtro(7)"> Desde una semana </a>
+		{% for informe in informes %}
+			<p> Informe {{informe.id}}:
+			{% if informe.temp != "0" %}
+				 Temperatura: {{ informe.temp }},   
+			{% endif %}
+			{% if informe.hum != "0" %}
+				Humedad del: {{ informe.hum }},  				
+			{% endif %}
+			{% if informe.lum != "0" %}
+				Luminosidad del: {{ informe.lum }},  				
+			{% endif %}
+			{% if informe.movimiento != "0" %}
+				Movimiento detectado, 				
+			{% endif %}
+			del dia: {{informe.date}}, con hora: {{informe.time}}
+			</p>
+		{% endfor %}
+{% endblock %}

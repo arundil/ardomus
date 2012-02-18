@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block content %}
+<script type="text/javascript">
+var z = 1;
+
+function addzona(){
+	var capa = document.getElementById('zonas');
+	var capa2 = document.createElement("div");
+	var texto = document.createElement("input");
+	var label = document.createElement("label");
+	var numero = document.createElement("input");
+	var br = document.createElement("br");
+	
+	label.innerHTML = "Nombre de la zona "+z+" (*): ";
+	texto.type = "text";
+	texto.name = z;
+	numero.type = "hidden";
+	numero.name = "z";
+	numero.value = z;
+	
+	capa2.id = z;
+	
+	capa.appendChild(capa2);
+	capa2.appendChild(label);
+	capa2.appendChild(texto);
+	capa2.appendChild(numero);
+	capa2.appendChild(br);
+	
+	z++
+	
+	if(z == 2){
+		var buton = document.getElementById('eliminar');
+		buton.type="button";
+	
+		var continuar = document.getElementById('cont');
+		continuar.type="submit";
+				
+	}
+}
+
+function eliminarzona(){
+	if (z != 1){
+		z--;
+		var capa = document.getElementById('zonas');
+		var divs = document.getElementById(z.toString());
+
+		capa.removeChild(divs);
+		if (z == 1){
+			var buton = document.getElementById('eliminar');
+			buton.type="hidden";
+			var continuar = document.getElementById('cont');
+			continuar.type="hidden";
+		}
+	}	
+}
+</script>
+
+
+
+<div id="cabecera">
+		<h1>Añadir nuevas zonas</h1>
+		<h3> {{mensaje}}</h3>
+</div>
+
+<form action="/validarZonas/" method="post">
+		
+		<div id="zonas">
+		
+		</div>			
+		
+		<div id="addzona">
+			<input type="button" onclick="addzona()" value="Añadir Zona" />
+		<br />
+		<br />
+		</div>
+		<div id="eliminarzona">
+			<input id="eliminar" type="hidden" onclick="eliminarzona();" value="Eliminar Zona" />
+		<br />
+		<br />
+		</div>
+		<div id="continuar">
+			<input id="cont" type="hidden" value="Continuar" />
+		</div>
+			
+</form>
+{% endblock %}

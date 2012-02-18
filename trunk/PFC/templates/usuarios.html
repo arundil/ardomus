@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div id="cabecera">
+		<h1> Usuario{{ users|pluralize }}</h1>
+</div>
+<div id="functions">
+		<a href="/addusuario/"> Añadir usuarios</a>
+</div>
+
+
+{% for usr in users %}
+<form action="/eliminaruser/" method="post">
+		<div>
+			{{ usr }}
+		{% if usr.is_staff %}
+			
+		{% else %}
+			<input type="hidden" name="userp" value="{{usr.username}}" />
+			<input type="submit" value="eliminar"/>
+			<br />
+				
+		{% endif %}
+		</div>
+		
+</form>
+
+<br />
+
+{% endfor %}
+
+<input type="button" id="atras" name="atras" value=" Atrás " onclick="javascript:history.back();" />
+
+{% endblock %}

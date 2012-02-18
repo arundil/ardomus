@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1> Crear un ahorro energetico nuevo </h1>
+<span> No es necesario rellenar todos los campos, 
+Los campos vacios o con errores se pondran los valores por defecto. Solo se aceptan 
+numeros entre 0 - 99</span>
+
+<form action="/addAhorro/" method="post">
+	
+	
+	<div id="descripcion">
+	<br />
+	<label> Descripcion del plan de ahorro energetico </label>
+	<input type="text" name="desc" />
+	</div>
+	<div id="luz">
+	<br /> 
+	<label> Limite superior de indice de luz </label>
+	<input type="text" name="luzh" /> 
+	<label> &nbsp; &nbsp; &nbsp; Limite inferior de indice de luz</label>
+	<input type="text" name="luzl" />
+	</div>
+	<div id="temperatura">
+	<label> Limite superior de temperatura </label>
+	<input type="text" name="temph" /> 
+	<label>  &nbsp; &nbsp; &nbsp; Limite inferior de temperatura </label>
+	<input type="text" name="templ" />
+	</div>
+	<div id="humedad">
+	<label> Limite superior de humedad  &nbsp; &nbsp; </label>
+	<input type="text" name="humh" /> 
+	<label>  &nbsp; &nbsp; &nbsp; &nbsp;Limite inferior de humedad  &nbsp; &nbsp;</label>
+	<input type="text" name="huml" />
+	</div>
+	<div>
+	<br />
+	<input type="submit" value="Continuar" />
+	</div>
+</form>
+
+{% endblock %}
