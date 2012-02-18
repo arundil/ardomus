@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<script type="text/javascript">
+/* Leyenda:
+	a = numero de actuadores nuevos (1 - 50)
+	motaA = nombre de la mota del actuador (101 - 150)
+	tipoA = nombre del tipo del actuador (201 - 250)
+	
+	s = numero de sensores nuevos (51 - 100)
+	motaS = nombre de la mota del sensor (151 - 200)
+	tipoS = nombre del tipo del sensot (251 - 300) */
+	
+a = 1
+s = 51
+
+function addactsen(motax, b, X){
+	/* if (a = 51 || s = 101){
+		alert("Ya no se pueden crear mas actuadores o sensores");
+	} else { */
+
+			var capa2 = document.createElement("div");
+			var texto = document.createElement("input");
+			var label = document.createElement("label");
+			var numero = document.createElement("input");
+			var mota = document.createElement("input");
+			var tipo = document.createElement("input");
+
+			var br = document.createElement("br");
+
+			numero.type = "hidden";
+			texto.type = "text";
+			mota.type = "hidden";
+			mota.value = motax;
+			tipo.type = "hidden";
+			tipo.value = X;
+
+			if (b) {
+				var capa = document.getElementById('act' + motax);
+				var boton = document.getElementById('boton' + X+motax);
+				boton.type = "hidden";
+				label.innerHTML = "Identificador del Actuador ";
+				texto.name = a;
+				mota.name = a + 100;
+				tipo.name = a + 200;
+				numero.name = "a";
+				numero.value = a;
+				a++
+
+			} else {
+				var capa = document.getElementById('sen' + motax);
+				var boton = document.getElementById('boto' + X+motax);
+				boton.type = "hidden";
+				label.innerHTML = "Identificador del Sensor ";
+				texto.name = s;
+				mota.name = s + 100;
+				tipo.name = s + 200;
+				numero.name = "s";
+				numero.value = s;
+				s++
+			}
+
+			capa2.id = motax;
+			capa.appendChild(capa2);
+			capa2.appendChild(label);
+			capa2.appendChild(texto);
+
+			capa2.appendChild(numero);
+			capa2.appendChild(mota);
+			capa2.appendChild(tipo);
+
+			capa2.appendChild(br);
+		}
+	/* } */
+</script>
+
+
+
+<div id="cabecera">
+		<h1> Añadir Actuadores y Sensores a las Motas </h1>
+		<h4> No te preocupes si te equivocas que despues puedes eliminar en la
+		 parte "Lista de los elementos de la red". Los identificadores no son obligatorios</h4>
+</div>
+
+<form id="accion" action="/validarActSen/" method="post">
+
+<div id="motas">
+		<label> Pon un Sensor o Actuador mínimo a cada nueva mota.</label>
+		<br />			
+		{% for mota in motas %}
+			<div id="act{{mota.id}}">
+			<label> Añadir actuadores a la mota {{mota}}</label>
+			<br />
+			{% for act in tipoAct %}
+			<input id="boton{{act}}{{mota.id}}" type="button" onclick="addactsen('{{mota.id}}', 1, '{{act}}');" value="Tipo {{act}}" />			
+			{% endfor %}
+			<br />
+			</div>
+			<br />
+			<div id="sen{{mota.id}}">
+			<label> Añadir sensores a la mota {{mota}}</label>
+			<br />
+			{% for sen in tipoSen %}
+			<input id="boto{{sen}}{{mota.id}}" type="button" onclick="addactsen('{{mota.id}}', 0, '{{sen}}');" value="Tipo {{sen}}" />			
+			{% endfor %}
+			</div>
+			<br />
+			<br />
+			
+		{% endfor %}
+</div>
+
+	<div id="newAct">
+	
+	</div>	
+
+	<div id="newSen">
+	
+	</div>
+	
+	<div id="terminar">
+		<input type="submit" value="Terminar" />
+	</div>
+
+</form>
+
+{% endblock %}

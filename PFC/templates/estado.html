@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+<div id="cabecera2">
+		<h1>Estado de los actuadores y sensores de la red</h1>
+</div>
+<br />
+<h3> Actuadores (1 = encendido, 0 = apagado)</h3>
+		{% for ard in arduinos %}
+			
+				<p> En la mota {{ard.mota}} se tiene: 
+				{% if ard.luz != 99%}
+					Luz = {{ard.luz}},   
+				{% endif%}
+				{% if ard.ac != 99%}   
+					AC = {{ard.ac}},
+				{% endif%}
+				{% if ard.persianas != 99%}   
+					Persianas = {{ard.persianas}},
+				{% endif%}
+				{% if ard.riego != 99%}   
+					Riego = {{ard.riego}}
+				{% endif%}
+				</p> 
+		{% endfor %}
+		
+<h3> Sensores (1 = activado, 0 = desactivado)</h3>
+				{% for sen in sensores %}
+			
+				<p> En la mota {{sen.mota}} se tiene: 
+				{% if sen.motaActiva != 99%}
+					Mota = {{sen.motaActiva}},   
+				{% endif%}
+				{% if sen.luz != 99%}
+					Luz = {{sen.luz}},   
+				{% endif%}
+				{% if sen.temperatura != 99%}
+					Temperatura = {{sen.temperatura}},   
+				{% endif%}
+				{% if sen.humedad != 99%}
+					Humedad = {{sen.humedad}},   
+				{% endif%}
+				{% if sen.movimiento != 99%}
+					Movimiento = {{sen.movimiento}},   
+				{% endif%}
+				
+				</p> 
+		{% endfor %}
+{% endblock %}

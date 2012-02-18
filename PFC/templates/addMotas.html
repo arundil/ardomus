@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<script type="text/javascript">
+
+/* m = numero de motas nuevas */
+m = 1
+
+function addmota(zonax){
+	var capa = document.getElementById('mota');	
+	var capa2 = document.createElement("div");
+	var texto = document.createElement("input");
+	var label = document.createElement("label");
+	var numero = document.createElement("input");
+	var zona = document.createElement("input");
+	var br = document.createElement("br");
+	
+	label.innerHTML = "Nombre de la Mota en la zona "+zonax+" (*): ";
+	texto.type = "text";
+	texto.name = m;
+	
+	zona.type = "hidden";
+	zona.name = m + 100;
+	zona.value = zonax;
+	
+	numero.type = "hidden";
+	numero.name = "m";
+	numero.value = m;
+	
+	capa2.id = m;
+	
+	capa.appendChild(capa2);
+	capa2.appendChild(label);
+	capa2.appendChild(texto);
+	capa2.appendChild(numero);
+	capa2.appendChild(zona);
+	capa2.appendChild(br);
+	
+	m++
+	
+	if(m == 2){
+		var buton = document.getElementById('eliminar');
+		buton.type="button";
+	
+		var continuar = document.getElementById('cont');
+		continuar.type="submit";
+	}
+}
+
+function eliminarmota(){
+	if (m != 1){
+		m--;
+		var capa = document.getElementById('mota');
+		var divs = document.getElementById(m.toString());
+
+		capa.removeChild(divs);
+		if (m == 1){
+			var buton = document.getElementById('eliminar');
+			buton.type="hidden";
+			var continuar = document.getElementById('cont');
+			continuar.type="hidden";
+		}
+	}	
+}
+
+</script>
+
+
+
+<div id="cabecera">
+		<h1> Añadir Motas a las Zonas </h1>
+		<h3> {{mensaje}}</h3>
+</div>
+
+<form id="accion" action="/validarMotas/" method="post">
+
+<div id="zonas">
+		<label> Pon una Mota minimo a la(s) nueva(s) zona(s).</label>
+		<br />			
+		{% for zona in zonas %}
+			<div>
+			<input type="button" onclick="addmota('{{zona}}');" value="{{zona}}" />			
+			<br />
+			</div>
+		{% endfor %}
+</div>
+
+	
+	<div id="mota">
+	<br/>
+	</div>	
+	<div id="eliminarmota">
+		<br />
+		<input id="eliminar" type="hidden" onclick="eliminarmota();" value="Eliminar Mota" />
+		<br />
+		<br />
+	</div>
+	<div id="continuar">
+			<input id="cont" type="hidden" value="Continuar" />
+	</div>
+
+</form>
+
+{% endblock %}

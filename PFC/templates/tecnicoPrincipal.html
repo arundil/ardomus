@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div id="cabecera">
+		<h1> Tecnico </h1>
+</div>
+
+{% if uc < 1%}
+<div id="newArdomus">
+	<a href="/newArdomus/"> Añadir una nueva red domotica</a>
+</div>
+{% endif %}
+{% if uc = 1%}
+<div id="options">
+	<a href="/listElementos/"> Lista de los elementos de la red (Añadir y/o quitar)</a>
+	<br />
+	<a href="/finish/"> Informe de configuracion de los elementos</a><br />
+	<a href="/addAdministrador/"> Añadir un administrador</a> <br />
+	<a href="/eliminarAdministrador/"> Eliminar un administrador</a><br />
+	<a href="/addVideo/"> Añadir una nueva cámara de seguridad</a>
+</div>
+
+{% endif %}
+{% endblock %}
+{% block opciones %}
+<!-- <a href="/addAdministrador/"> Añadir un administrador</a> <br />
+<a href="/eliminarAdministrador/"> Eliminar un administrador</a> -->
+{% endblock %}

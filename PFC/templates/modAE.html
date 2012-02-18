@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1> Modificar el ahorro energetico {{ ahorro.descripcion }} </h1>
+
+<form action="/addAhorro/" method="post">
+		
+	<div id="descripcion">
+	<br />
+	<label> Descripcion del plan de ahorro energetico </label>
+	<input type="text" name="desc" value = "{{ahorro.descripcion}}" />
+	</div>
+	<div id="luz">
+	<br /> 
+	<label> Limite superior de indice de luz </label>
+	<input type="text" name="luzh" value ="{{ahorro.luzh}}"/> 
+	<label> &nbsp; &nbsp; &nbsp; Limite inferior de indice de luz</label>
+	<input type="text" name="luzl" value = "{{ahorro.luzl}}"/>
+	</div>
+	<div id="temperatura">
+	<label> Limite superior de temperatura </label>
+	<input type="text" name="temph" value = "{{ahorro.temperaturah}}"/> 
+	<label>  &nbsp; &nbsp; &nbsp; Limite inferior de temperatura </label>
+	<input type="text" name="templ" value = "{{ahorro.temperatural}}"/>
+	</div>
+	<div id="humedad">
+	<label> Limite superior de humedad  &nbsp; &nbsp; </label>
+	<input type="text" name="humh" value = "{{ahorro.humedadh}}"/> 
+	<label>  &nbsp; &nbsp; &nbsp; &nbsp;Limite inferior de humedad  &nbsp; &nbsp;</label>
+	<input type="text" name="huml" value = "{{ahorro.humedadl}}"/>
+	</div>
+	<div>
+	<input type="hidden" name="id" value = "{{ahorro.id}}"/> 
+	</div>
+	<div>
+	<br />
+	<input type="submit" value="Continuar" />
+	</div>
+
+</form>
+
+{% endblock %}

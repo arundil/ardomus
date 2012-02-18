@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div id="cabecera">
+		<h1> La unidad de control </h1>
+		<h3> {{ mensaje }}</h3>
+</div>
+
+
+<form action="/validarUC/" method="post">
+		<div id="uc">
+ 			<label> Identificador de la unidad de control</label>
+			<input type="text" name="uc"/>  <br />
+			<!-- <label> Password de la unidad de control</label>
+			<input type="text" name="password"/>  <br /> -->
+			<input type="submit" value="Añadir Zonas"/> 
+			
+		</div>
+</form>
+
+{% endblock %}

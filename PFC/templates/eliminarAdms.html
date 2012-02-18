@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<script type="text/javascript">
+function confirmar(id){
+    if (confirm('¿Estas seguro de eliminar al administrador?')){
+    	var form = document.getElementById("adm"+id);
+    	var x = document.createElement("input");
+    	
+    	form.appendChild(x);
+       	form.submit();
+    }
+}
+</script> 
+
+<div id="cabecera">
+		<h1> Eliminar administradores </h1>
+</div>
+
+
+<div id="eliminar">
+	{% for adm in adms %}
+	<form id="adm{{adm.id}}" action="/eliminarAdministrador/" method="post">
+	 <div>
+		<span> Administrador {{adm.username}}</span>
+		<input type="hidden" name="id" value="{{adm.id}}" />
+		<a href="#" onclick="confirmar('{{adm.id}}')"> Eliminar</a>
+	</div>
+	</form>
+	{% endfor%}
+</div>
+
+{% endblock %}

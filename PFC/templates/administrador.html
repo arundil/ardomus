@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div id="cabecera">
+		<h1>Administración</h1>
+</div>
+
+<div id="usuarios">
+<a href="/usuarios/"> Usuarios </a>
+</div>
+
+<div id="permisos">
+<a href="/permisos/"> Lista de permisos de los ususarios</a>
+</div>
+
+<div id="informes">
+<a href="/informes/"> Informes de los sensores </a>
+</div>
+
+<div id="video">
+<a href="/video/"> Videovigilancia</a>
+</div>
+
+<div id="estado">
+<a href="/estado/"> Estado de los actuadores</a>
+</div>
+
+<div id="password">
+<a href="/password/"> Cambiar datos de los usuarios</a>
+</div>
+
+<div id="alarmas">
+<a href="/alarmas/"> Alarmas</a>
+</div>
+
+<div id="contactar">
+<a href="/contactar/"> Contactar con Tecnico</a>
+</div>
+<br />
+
+<input type="button" id="atras" name="atras" value=" Atrás " onclick="javascript:history.back();" />
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block content %}
+<script type="text/javascript">
+
+function modificar(id, x){
+	if (x) {
+		var form = document.getElementById("modificar");
+	}else{
+		var form = document.getElementById("eliminar");	
+	}
+	var valor = document.createElement("input");
+	
+	valor.type ="hidden";
+	valor.name = "id";
+	valor.value = id;
+	
+	form.appendChild(valor);
+	form.submit();
+}
+
+</script>
+
+<div id="cabecera">
+		<h1> Planes de Ahorro Energetico </h1>
+		<h3>{{mensaje}}</h3>
+		<br />
+</div>
+	
+	{% for ahorro in ahorros%}
+	<form action="/ahorro/" method="post">
+	
+	<p> El ahorro {{ahorro.descripcion}} tiene los siguiente valores: 
+	LuzH = {{ahorro.luzh}}, LuzL = {{ahorro.luzl}},
+	TemperaturaH = {{ahorro.temperaturah}}, TemperaturaL = {{ahorro.temperatural}}, 
+	HumedadH = {{ahorro.humedadh}}, HumedadL = {{ahorro.humedadl}}.
+	<input type="hidden" name="id" value="{{ahorro.id}}" />   
+	{% if user.is_staff %}
+		{% if ahorro.activado %}
+
+				<input type="submit" value = "Desactivar ahorro energetico" />
+
+		{% else %}
+
+				<input type="submit" value = "Activar ahorro energetico" />
+				
+				{% if ahorro.id != 1 %}
+				<a href="#" onclick="modificar('{{ahorro.id}}', 1);"> Modificar </a>
+				<a href="#" onclick="modificar('{{ahorro.id}}', 0);"> Eliminar </a>
+				{% endif %}
+
+			
+			
+		{% endif %}
+		
+	{% endif %}
+	<br />
+	</p>
+	</form>
+	{% endfor %}
+
+<form id="eliminar" action ="/eliminarAE/" method="post">
+
+</form>
+
+<form id="modificar" action ="/modAE/" method = "post">
+
+</form>
+{% endblock %}
+{% block opciones %}
+	{% if user.is_staff %}
+	<a href="/addAhorro/"> Crear un ahorro energético nuevo </a>
+	{% endif %}
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+<div id="cabecera2">
+		<h3>{{ mensaje }}</h3>
+		<h1>Zona{{ zonas|pluralize }}</h1>
+</div>
+
+		{% for zona in zonas %}
+<form action="/buscarmotas/" method="get">
+		<div>
+			{% if user.is_superuser %}
+			<input type="hidden" name="zona" value="{{zona.nombre}}" />
+			<input type="submit" value="{{zona.nombre}}"/>
+			<br/>
+			{% else %}
+			<input type="hidden" name="zona" value="{{zona.zona.nombre}}" />
+			<input type="submit" value="{{zona.zona.nombre}}"/>
+			<br/>
+			{% endif %}
+		</div>
+		
+</form>
+		{% endfor %}
+{% endblock %}

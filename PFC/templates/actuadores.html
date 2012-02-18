@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div id="cabecera2">
+		<h1> {{ zona }} </h1>
+		<h3> {{ mensaje }}</h3>
+</div>
+
+<!-- Mostramos los actuadores que se encuentran en la zona, poniendo un boton para ir
+     a su accion --> 
+{% for mota in motas %}
+	<div> <h4> Actuadores de la mota: {{ mota }}</h4>
+	
+	{% for actuador in actuadores %}			
+		{% if actuador.mota == mota %}
+			<form action="/accion/" method="post">
+				<div>
+					<input type="hidden" name="actuador" value="{{actuador.tipo.nombre}}" />
+					<input type="hidden" name="zona" value="{{zona.nombre}}" />
+					<input type="hidden" name="mota" value="{{mota.nombre}}" />
+					<input type="submit" value="{{actuador.tipo.nombre}}"/>
+					<br />	
+				</div>		
+			</form>
+			{% endif %}
+		{% endfor %}
+	</div>
+{% endfor %}
+		<br />
+		<input type="button" id="atras" name="atras" value=" Atrás " onclick="javascript:history.back();" />		
+
+{% endblock %}
